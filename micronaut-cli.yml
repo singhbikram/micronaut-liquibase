@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: micronaut.liquibase
+---
+testFramework: spock
+sourceLanguage: groovy

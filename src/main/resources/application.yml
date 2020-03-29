@@ -1,0 +1,42 @@
+---
+micronaut:
+  application:
+    name: micronaut-liquibase
+  server:
+    port: 9596
+---
+datasources.default: {}
+---
+#consul:
+#  client:
+#    registration:
+#      enabled: true
+#    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+
+---
+dataSource:
+  pooled: true
+  jmxExport: true
+  dbCreate: none
+  url: jdbc:postgresql://localhost:5432/bookdb
+  username: postgres
+  password: admin
+  driverClassName: org.postgresql.Driver
+jpa:
+  default:
+    packages-to-scan:
+      - micronaut.liquibase.domain
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show_sql: true
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:db/liquibase-changelog.xml'
+endpoints:
+  liquibase:
+    enabled: true
+    sensitive: false
+
